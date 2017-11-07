@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stopService.setOnClickListener((View.OnClickListener) this);
         bindService.setOnClickListener(this);
         unbindService.setOnClickListener(this);
-        ;;;;
 
 
         IntentFilter filter = new IntentFilter("finish");
@@ -106,8 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_service:
-                Intent startIntent = new Intent(this, MyService.class);
-                startService(startIntent);
+           //     Intent startIntent = new Intent(this, MyService.class);
+             //   startService(startIntent);
+                NewMessageNotification newMsg = new NewMessageNotification();
+                newMsg.notify(this, "当前天气是 “20度”", 1);
                 break;
             case R.id.stop_service:
                 Log.d("MyService", "click Stop Service button");
