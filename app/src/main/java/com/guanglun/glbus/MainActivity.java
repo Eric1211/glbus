@@ -24,28 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public  Intent mBusIntent;
     public Intent mLoginIntent;
     public Intent mSettingIntent;
-    private Button startService;
-    private Button stopService;
-    private Button bindService;
-    private Button unbindService;
-    private MyService.MyBinder myBinder;
-    private ownBroadcastReceiver mFinishReceiver = new ownBroadcastReceiver();
 
-   // filter.addAction("android.intent.action.MY_BROADCAST");
-    private ServiceConnection connection = new ServiceConnection() {
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Log.d("service", "onServiceDisconnected");
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d("service", "onServiceConnected");
-            myBinder = (MyService.MyBinder) service;
-            myBinder.startDownload();
-        }
-    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -82,19 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("MyService", "MainActivity thread id is " + Thread.currentThread().getId());
-        startService = (Button) findViewById(R.id.start_service);
-        stopService = (Button) findViewById(R.id.stop_service);
-        bindService = (Button) findViewById(R.id.bind_service);
-        unbindService = (Button) findViewById(R.id.unbind_service);
-
-        startService.setOnClickListener((View.OnClickListener) this);
-        stopService.setOnClickListener((View.OnClickListener) this);
-        bindService.setOnClickListener(this);
-        unbindService.setOnClickListener(this);
 
 
-        IntentFilter filter = new IntentFilter("finish");
-        registerReceiver(mFinishReceiver, filter);
+
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -104,30 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.start_service:
-           //     Intent startIntent = new Intent(this, MyService.class);
-             //   startService(startIntent);
-                NewMessageNotification newMsg = new NewMessageNotification();
-                newMsg.notify(this, "当前天气是 “20度”", 1);
-                break;
-            case R.id.stop_service:
-                Log.d("MyService", "click Stop Service button");
-                Intent stopIntent = new Intent(this, MyService.class);
-                stopService(stopIntent);
-                break;
-            case R.id.bind_service:
-                Intent bindIntent = new Intent(this, MyService.class);
-                bindService(bindIntent, connection, BIND_AUTO_CREATE);
-                break;
-            case R.id.unbind_service:
-                Log.d("MyService", "click Unbind Service button");
-                unbindService(connection);
-                break;
-
-            case R.id.broadcast:
-                Log.d("MyService", "send broadcast");
-                send();
-                break;
             default:
                 break;
         }
@@ -137,18 +83,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy()
     {
         super.onDestroy();
-        //发送广播
-        sendBroadcast(new Intent("finish"));
-        //一定要注销广播
-        unregisterReceiver(mFinishReceiver);
     }
 
 
-    private void send() {
-        Intent intent = new Intent("android.intent.action.MY_BROADCAST");
-        intent.putExtra("msg", "hello receiver.");
-        sendBroadcast(intent);
-    }
 
 
 }

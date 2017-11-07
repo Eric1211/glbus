@@ -20,32 +20,11 @@ public class MyService extends Service {
     private MyBinder mBinder = new MyBinder();
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate() executed");
         Log.d("MyService", "MyService thread id is " + Thread.currentThread().getId());
-        Intent intent = new Intent(MyService.this,MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
-        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext());
-        //设置通知到来时的一些选项
-
-        mBuilder.setTicker("notify_activity");
-        //通知消息下拉是显示的文本内容
-        mBuilder.setContentText("你收到了一个红包，速度进入APP领取。一个很大的红包哦");
-        //通知栏消息下拉时显示的标题
-        mBuilder.setContentTitle("测试通知栏通知");
-        //接收到通知时，按手机的默认设置进行处理，声音，震动，灯
-        mBuilder.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
-        //通知栏显示图标
-        mBuilder.setSmallIcon(R.drawable.notification_template_icon_bg);
-        mBuilder.setContentIntent(pendingIntent);
-
-        Notification notification = mBuilder.build();
-        notification.flags = Notification.FLAG_AUTO_CANCEL;
-        manager.notify(1,notification);
     }
 
     @Override
