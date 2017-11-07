@@ -31,8 +31,12 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
 
+        <activity
+            android:name=".debugScreenActivity">
+        </activity>
+
         <service
-            android:name=".MyService"
+            android:name="com.guanglun.glbus.MyService"
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
@@ -42,7 +46,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".debugScreen"></activity>
+
     </application>
 
 </manifest>

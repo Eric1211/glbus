@@ -7,7 +7,7 @@
         android:title="@string/title_bus" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_transfer"
         android:icon="@drawable/ic_transform_black_24dp"
         android:title="@string/title_transfer" />
 

@@ -42,26 +42,30 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_debug_screen);
+
+
         startService = (Button) findViewById(R.id.start_service);
         stopService = (Button) findViewById(R.id.stop_service);
         bindService = (Button) findViewById(R.id.bind_service);
         unbindService = (Button) findViewById(R.id.unbind_service);
 
-        startService.setOnClickListener((View.OnClickListener) this);
-        stopService.setOnClickListener((View.OnClickListener) this);
-        bindService.setOnClickListener(this);
-        unbindService.setOnClickListener(this);
+        startService.setOnClickListener((View.OnClickListener)this);
+        stopService.setOnClickListener((View.OnClickListener)this);
+        bindService.setOnClickListener((View.OnClickListener)this);
+        unbindService.setOnClickListener((View.OnClickListener)this);
 
      //   IntentFilter filter = new IntentFilter("finish");
      //   registerReceiver(mFinishReceiver, filter);
 
-        setContentView(R.layout.activity_debug_screen);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start_service:
+                Log.d("MyService", "click Start Service button");
                 Intent startIntent = new Intent(this, MyService.class);
                 startService(startIntent);
 

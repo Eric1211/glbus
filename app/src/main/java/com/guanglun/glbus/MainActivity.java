@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public  Intent mBusIntent;
     public Intent mLoginIntent;
     public Intent mSettingIntent;
-
-
+    public  Intent mNotificationIntent;
+    public  Intent mFavoriteIntent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,24 +33,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                 //   mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_bus:
+                    mTextMessage.setText(R.string.title_bus);
                     Log.d("点击HOME tag", "点击ET_phone");
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_transfer:
                     Log.d("点击dashboard tag", "点击ET_phone");
-                //    mTextMessage.setText(R.string.title_dashboard);
+                   mTextMessage.setText(R.string.title_transfer);
                     mLoginIntent =new Intent();
                     ComponentName component = new ComponentName(MainActivity.this, LoginActivity.class);
                     mLoginIntent.setComponent(component);
                     startActivity(mLoginIntent);
                     return true;
                 case R.id.navigation_notifications:
-                    mSettingIntent =new Intent();
+                    mNotificationIntent =new Intent();
                     ComponentName component2 = new ComponentName(MainActivity.this, SettingsActivity.class);
-                    mSettingIntent.setComponent(component2);
+                    mNotificationIntent.setComponent(component2);
+                    startActivity(mNotificationIntent);
+                    return true;
+                case R.id.navigation_setting:
+                    mSettingIntent =new Intent();
+                    ComponentName component3 = new ComponentName(MainActivity.this, debugScreenActivity.class);
+                    mSettingIntent.setComponent(component3);
                     startActivity(mSettingIntent);
                     return true;
+
             }
             return false;
         }
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("MyService", "MainActivity thread id is " + Thread.currentThread().getId());
+     //   Log.d("MyService", "MainActivity thread id is " + Thread.currentThread().getId());
 
 
 
