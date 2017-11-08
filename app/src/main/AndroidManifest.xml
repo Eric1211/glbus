@@ -15,40 +15,50 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
+           android:launchMode="singleTask"
             android:label="@string/title_activity_login" />
+
         <activity
             android:name=".SettingsActivity"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_settings" />
 
         <activity
-            android:name=".debugScreenActivity">
+            android:name=".debugScreenActivity"
+            android:launchMode="singleTask">
+        </activity>
+
+        <activity
+            android:name=".favoriteActivity"
+            android:launchMode="singleTask">
         </activity>
 
         <service
-            android:name="com.guanglun.glbus.MyService"
+            android:name=".MyService"
             android:enabled="true"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.guanglun.glbus.IMyAidlInterface"/>
+                <action android:name="com.guanglun.glbus.IMyAidlInterface" />
             </intent-filter>
         </service>
-
 
         <receiver
             android:name=".ownBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
-
 
     </application>
 

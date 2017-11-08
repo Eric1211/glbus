@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mSettingIntent.setComponent(component3);
                     startActivity(mSettingIntent);
                     return true;
+                case  R.id.navigation_favorite:
+                    mFavoriteIntent = new Intent();
+                    ComponentName component4 = new ComponentName(MainActivity.this, favoriteActivity.class);
+                    mFavoriteIntent.setComponent(component4);
+                    startActivity(mFavoriteIntent);
+                    return true;
 
             }
             return false;
@@ -68,14 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LogUtil.d("MainActivity thread id is " + Thread.currentThread().getId());
-
-
-
+        LogUtil.d("MainActivity process id is " + android.os.Process.myPid());
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        processExtraData();
     }
 
      @Override
@@ -92,7 +97,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
 
+        super.onNewIntent(intent);
 
+        setIntent(intent);//must store the new intent unless getIntent() will return the old one
 
+        processExtraData();
+
+    }
+
+    private void processExtraData(){
+
+        Intent intent = getIntent();
+        //use the data received here
+    }
 }

@@ -67,7 +67,7 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
         sendBroadcast.setOnClickListener((View.OnClickListener)this);
 
         LogUtil.d("debugScreenActivity process ID is " + android.os.Process.myPid());
-
+        processExtraData();
     }
 
     @Override
@@ -106,6 +106,25 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
             default:
                 break;
         }
+    }
+
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+
+        super.onNewIntent(intent);
+
+        setIntent(intent);//must store the new intent unless getIntent() will return the old one
+
+        processExtraData();
+
+    }
+
+    private void processExtraData(){
+
+        Intent intent = getIntent();
+        //use the data received here
     }
 
 }

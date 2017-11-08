@@ -1,5 +1,4 @@
 <resources>
-    <string name="logtag">glbus</string>
     <string name="app_name">嘉峪关公交</string>
     <string name="title_bus">Bus</string>
     <string name="title_transfer">Transfer</string>
