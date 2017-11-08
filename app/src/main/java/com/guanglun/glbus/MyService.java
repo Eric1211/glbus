@@ -13,6 +13,7 @@ public class MyService extends Service {
     }
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -69,7 +70,7 @@ public class MyService extends Service {
 
         @Override
         public int plus(int a, int b) throws RemoteException {
-            LogUtil.d("plus called a= , b = "+ a +b);
+            LogUtil.d("plus called a= "+ a + ", b = " + b);
             return a + b;
         }
 
