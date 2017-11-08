@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("创建loginActity", "");
+        LogUtil.d("创建loginActity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -99,27 +99,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void populateAutoComplete() {
-        Log.d("写email地址时，尝试自动完成", "");
+        LogUtil.d("写email地址时，尝试自动完成");
         if (!mayRequestContacts()) {
             return;
         }
-        Log.d("initLoader 开始", "");
+        LogUtil.d("initLoader 开始");
         getLoaderManager().initLoader(0, null, this);
-        Log.d("initLoader 结束", "");
+        LogUtil.d("initLoader 结束");
     }
 
     private boolean mayRequestContacts() {
-        Log.d("请求打开联系人", "");
+        LogUtil.d("请求打开联系人");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 
             return true;
         }
         if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            Log.d("PERMISSION_GRANTED", "");
+            LogUtil.d("PERMISSION_GRANTED");
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Log.d("shouldShow", "shouldShowRequestPermissionRationale");
+            LogUtil.d("shouldShowRequestPermissionRationale");
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     });
         } else {
             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-            Log.d("requestPermissions", "READ_CONTACTS, REQUEST_READ_CONTACTS");
+            LogUtil.d("READ_CONTACTS, REQUEST_READ_CONTACTS");
         }
         return false;
     }
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            Log.d("onRequestPermission", "onRequestPermissionsResult");
+            LogUtil.d("onRequestPermissionsResult");
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
             }

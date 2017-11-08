@@ -1,39 +1,32 @@
 package com.guanglun.glbus;
 
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
+import android.os.RemoteException;
 import android.util.Log;
-
-import static android.content.ContentValues.TAG;
 
 public class MyService extends Service {
     public MyService() {
     }
-    public static final String TAG = "MyService";
-    private NotificationManager manager;
-    private MyBinder mBinder = new MyBinder();
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate() executed");
-  //      Log.d("MyService", "MyService thread id is " + Thread.currentThread().getId());
+        LogUtil.d("onCreate() executed");
+        LogUtil.d("process ID is " + android.os.Process.myPid());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand() executed");
+        LogUtil.d("onStartCommand() executed");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "new Thread start");
+                LogUtil.d("new Thread start");
             }
         }).start();
         return super.onStartCommand(intent, flags, startId);
@@ -42,8 +35,7 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy() executed");
-
+        LogUtil.d("onDestroy() executed");
     }
 
     @Override
@@ -54,7 +46,7 @@ public class MyService extends Service {
 
     class MyBinder extends Binder {
         public void startDownload() {
-            Log.d("MyBinder", "startDownload() executed");
+            LogUtil.d("startDownload() executed");
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -62,7 +54,32 @@ public class MyService extends Service {
                 }
             }).start();
         }
-
     }
+
+    IMyAidlInterface.Stub mBinder = new IMyAidlInterface.Stub()
+    {
+        @Override
+        public String toUpperCase(String str) throws RemoteException {
+            if (str != null) {
+                LogUtil.d("toUpperCase called");
+                return str.toUpperCase();
+            }
+            return null;
+        }
+
+        @Override
+        public int plus(int a, int b) throws RemoteException {
+            LogUtil.d("plus called a= , b = "+ a +b);
+            return a + b;
+        }
+
+
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
+                               double aDouble, String aString) {
+            // do nothing.
+        }
+
+    };
 
 }

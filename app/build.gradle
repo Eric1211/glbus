@@ -11,6 +11,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        //公共字段
+        buildConfigField('String', 'logTag', '"GLBUS"')    //打印日志输出的TAG标记名
+        buildConfigField('boolean', 'crashInfoSaveAsJson', 'false') //崩溃日志保存为JSON,否则直接保存为String
     }
     buildTypes {
         release {

@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (item.getItemId()) {
                 case R.id.navigation_bus:
                     mTextMessage.setText(R.string.title_bus);
-                    Log.d("点击HOME tag", "点击ET_phone");
+                    LogUtil.d("点击HOME");
                     return true;
                 case R.id.navigation_transfer:
-                    Log.d("点击dashboard tag", "点击ET_phone");
+                    LogUtil.d("点击dashboard tag");
                    mTextMessage.setText(R.string.title_transfer);
                     mLoginIntent =new Intent();
                     ComponentName component = new ComponentName(MainActivity.this, LoginActivity.class);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     //   Log.d("MyService", "MainActivity thread id is " + Thread.currentThread().getId());
+        LogUtil.d("MainActivity thread id is " + Thread.currentThread().getId());
 
 
 
