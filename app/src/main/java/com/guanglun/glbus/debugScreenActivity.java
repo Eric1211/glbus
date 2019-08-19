@@ -21,6 +21,7 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
     private Button bindService;
     private Button unbindService;
     private Button sendBroadcast;
+    private Button asyncDownBtn;
     private MyService.MyBinder myBinder;
     private IMyAidlInterface myAIDLService;
     //   private ownBroadcastReceiver mFinishReceiver = new ownBroadcastReceiver();
@@ -59,12 +60,14 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
         bindService = (Button) findViewById(R.id.bind_service);
         unbindService = (Button) findViewById(R.id.unbind_service);
         sendBroadcast = (Button) findViewById(R.id.broadcast);
+        asyncDownBtn = (Button) findViewById(R.id.startDownLoad);
 
         startService.setOnClickListener((View.OnClickListener)this);
         stopService.setOnClickListener((View.OnClickListener)this);
         bindService.setOnClickListener((View.OnClickListener)this);
         unbindService.setOnClickListener((View.OnClickListener)this);
         sendBroadcast.setOnClickListener((View.OnClickListener)this);
+        asyncDownBtn.setOnClickListener((View.OnClickListener)this);
 
         LogUtil.d("debugScreenActivity process ID is " + android.os.Process.myPid());
         processExtraData();
@@ -93,7 +96,12 @@ public class debugScreenActivity extends AppCompatActivity implements View.OnCli
                 LogUtil.d("click Unbind Service button");
                 unbindService(connection);
                 break;
-
+            case R.id.startDownLoad:
+                Intent tmpIntent =new Intent();
+                ComponentName component = new ComponentName(debugScreenActivity.this, DownloadActivity.class);
+                tmpIntent.setComponent(component);
+                startActivity(tmpIntent);
+                break;
             case R.id.broadcast:
                 LogUtil.d("send broadcast");
 
