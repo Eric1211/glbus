@@ -22,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+	
+	sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -35,6 +41,7 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.tencent.bugly:crashreport:2.6.6.1'
     implementation 'com.android.support:design:27.1.1'
+	implementation files('libs/BaiduLBS_Android.jar')
     //   implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     //   implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation 'junit:junit:4.12'
