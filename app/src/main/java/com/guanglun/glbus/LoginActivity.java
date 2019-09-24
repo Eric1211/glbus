@@ -149,6 +149,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.

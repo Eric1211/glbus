@@ -40,6 +40,7 @@ public class favoriteActivity extends AppCompatActivity implements View.OnClickL
     private LocationService locationService;
     private TextView LocationResult;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class favoriteActivity extends AppCompatActivity implements View.OnClickL
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(15));
         locService = ((LocationApplication) getApplication()).locationService;
+        locService.setActivity(this);
         LocationClientOption mOption = locService.getDefaultLocationClientOption();
         mOption.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
         mOption.setCoorType("bd09ll");
@@ -87,7 +89,6 @@ public class favoriteActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         }
-
     };
 
 
@@ -187,6 +188,7 @@ public class favoriteActivity extends AppCompatActivity implements View.OnClickL
             }
         }
     };
+
 
 
     /*****
@@ -303,7 +305,6 @@ public class favoriteActivity extends AppCompatActivity implements View.OnClickL
                                 LocationResult.setText(s);
                             }
                         });
-
                     }
                 }).start();
             }

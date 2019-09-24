@@ -1,13 +1,12 @@
 package com.guanglun.glbus;
-
-import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 
+
+// https://blog.csdn.net/forlong401/article/details/13772733
 public class MyService extends Service {
     public MyService() {
     }
